@@ -1,20 +1,26 @@
-import React, { Component } from 'react'
+import React from 'react'
+import {connect} from 'dva'
+import ProductList from '../../components/productList'
 
-export default class Product extends Component {
-  constructor(props) {
-    super(props)
-  
-    this.state = {
-       time:new Date().toLocaleTimeString()
-    }
+const Products = ({dispatch,products}) =>{
+  function handleDelete(id){
+    dispatch({
+      type:'products/delete',
+      payload:id
+    })
   }
-  
-  render() {
-    const {time} = this.state
-    return (
-      <div>
-        <h2>list of products {time}</h2>
-      </div>
-    )
-  }
+
+  const time = new Date().toLocaleTimeString()
+  return (
+    <div>
+      <h2>list of products {time}</h2>
+      <ProductList onDelete = {handleDelete} products = {products}/>
+    </div>
+  )
 }
+
+// export default Products
+export default connect(({products})=>({
+  products
+}))(Products)
+
