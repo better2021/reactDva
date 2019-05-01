@@ -8,3 +8,8 @@ export default{
     }
   }
 }
+
+
+// 通过 dispatch 发起一个 action 触发 state 中的数据改变
+// 如果是同步行为会直接通过 Reducers 改变 State
+// 如果是异步行为会先触发 Effects 然后流向 Reducers 最终改变 State
